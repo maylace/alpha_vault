@@ -20,4 +20,31 @@ RSpec.describe UsersController, type: :controller do
       expect(user_response['email']).to eq(user.email)
     end
   end
+
+  describe 'POST#create' do
+    before(:each) do
+      @user_attributes = FactoryGirl.attributes_for(:user)
+      post :create, { user: @user_attributes }, format: :json
+    end
+
+    it 'renders json of the user created' do
+      user_response = JSON.parse(response.body)
+      expect(user_response['email']).to eq(@user_attributes[:email])
+    end
+
+    it 'should respond with status 201' do
+      expect(response.status).to eq(201)
+    end
+  end
+
+  describe 'DELETE#destroy' do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      delete :destroy, id: @user.id, format: :json
+    end
+
+    it 'should respond with 204' do
+      expect(response.status).to eq(204)
+    end
+  end
 end
