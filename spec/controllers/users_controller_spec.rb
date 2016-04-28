@@ -46,5 +46,5 @@ RSpec.describe UsersController, type: :controller do
     it 'should respond with 204' do
       expect(response.status).to eq(204)
     end
-  end
-end
+  en
+ednd
